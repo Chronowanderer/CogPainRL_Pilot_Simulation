@@ -11,6 +11,7 @@ class Parameters:
         self._num_steps = int(1e4) # number of overall steps for training
         self._episode_steps = 50 # number of steps in a episode for training
         self._epsilon = .8  # non-guessing rate for eplison-greedy policy
+        self._tau_action = 1. # temperature parameter for action selection
         ### Model-free parameters ###
         self._step_size_Q = .2 # learning rate of Q-value
         self._discount_Q = .9  # discount of Q-value
@@ -40,6 +41,7 @@ class Parameters:
         self._Policies = {
             'random': lambda qval, obv: random_policy(qval, obv),
             'eplison': lambda qval, obv: epsilon_greedy(qval, obv, epsilon=self._epsilon, body_prior_type='uni'),
+            'softmax': lambda qval, obv: softmax_policy(qval, obv, tau_softmax=self._tau_action, body_prior_type='uni')
         }
         self._Agents = {
             'random': lambda qval, bhvl, eval, n: PolicyEvalAgent(qval, bhvl, eval, n,
@@ -131,6 +133,10 @@ class Parameters:
     @property
     def tau(self):
         return self._tau
+
+    @property
+    def tau_action(self):
+        return self._tau_action
 
     @property
     def alpha_mf(self):
