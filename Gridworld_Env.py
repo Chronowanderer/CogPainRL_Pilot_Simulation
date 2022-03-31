@@ -399,7 +399,7 @@ class GridWorld(dm_env.Environment):
                                  dtype=np.uint8,
                                  sep='')
             w, h = fig.canvas.get_width_height()
-            data = data.reshape((h * 2, w * 2, 3))
+            data = data.reshape((h, w, 3))
             plt.close(fig)
             return data
 
