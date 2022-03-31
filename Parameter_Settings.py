@@ -34,7 +34,7 @@ class Parameters:
         elif set == 1:
             self._MF_type = 'sarsa'
         else:
-            raise ValueError('Parameter set not implemented!')
+            raise ValueError('Parameter set is not implemented!')
 
         ### List of Policy and Agent ###
         self._Policies = {
